@@ -1,0 +1,11 @@
+
+    <div ng-show="toDelete">
+        <div class="overlay" >
+            <div class="popup">
+                <p class="content">Delete this?</p>
+                <button type="button" ng-click="deleteConfirmed(); toDelete = false">Yes</button>
+                <button type="button" ng-click="toDelete = false">No</button>
+            </div>
+        </div>
+   </div>
+
