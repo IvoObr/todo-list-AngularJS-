@@ -3,12 +3,12 @@ angular.module('toDoListApp', ['ngRoute',])
         function($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/home-page.html',
-                controller: 'mainCtrl',
+                templateUrl: 'views/todo-lists-page.html',
+                controller: 'todoListController',
             })
-            .when('/todos-page', {
+            .when('/todos-page/:index', {
                 templateUrl: 'views/todos-page.html',
-                controller: 'mainCtrl',
+                controller: 'todoController',
             })
             .when('/bot-page', {
                 templateUrl: 'views/bot-page.html',
@@ -18,4 +18,3 @@ angular.module('toDoListApp', ['ngRoute',])
             redirectTo: '/'
         });
     }]);
-

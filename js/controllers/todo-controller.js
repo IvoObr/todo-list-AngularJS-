@@ -1,7 +1,8 @@
 // 'use strict';
 
 angular.module('toDoListApp')
-    .controller('mainCtrl', function($scope, dataService) {
+    .controller('todoController', ['$scope', 'dataService', '$location',
+        function($scope, dataService, $location) {
 
         var index;
 
@@ -14,20 +15,23 @@ angular.module('toDoListApp')
             index++;
         };
 
-        $scope.testConsole = dataService.testConsole;
 
-        $scope.testFunc = function() {
-            console.log('test log');
-        };
+        // $scope.todos = dataService.getTodos(function(response) {
+        //     console.log(response.data);
+        //     $scope.todos = response.data;
+        // });
 
-        $scope.testNgChange = function() {
-            console.log('test ng-change');
-        };
+        function getTodoListIndex() {
+            var UrlPathArr = $location.path().split('/');
+            var todoListIndex = Number(UrlPathArr[UrlPathArr.length - 1].replace('"',''));
+            console.log(todoListIndex);
+            return todoListIndex;
+        }
 
-        $scope.todos = dataService.getTodos(function(response) {
-            console.log(response.data);
-            $scope.todos = response.data;
-        });
+
+        $scope.todos = dataService.getTodos(getTodoListIndex());
+        console.log('$scope.todos:', $scope.todos);
+
 
         $scope.deleteTodo = function(todo, index) {
             $scope.toDelete = true;
@@ -41,6 +45,10 @@ angular.module('toDoListApp')
         $scope.saveTodo = function(todo) {
             dataService.saveTodo(todo);
         };
+
+
+
+
 
         $scope.moveItem = function (origin, destination) {
             if (destination < 0) {
@@ -62,12 +70,4 @@ angular.module('toDoListApp')
             $scope.moveItem(itemIndex, itemIndex + 1);
         };
 
-        $scope.goToItem = function (todo) {
-            // $scope.todos =
-            //
-            //     response.data;
-        }
-
-
-
-    });
+    }]);

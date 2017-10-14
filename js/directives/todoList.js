@@ -1,7 +1,7 @@
 angular.module('toDoListApp')
-    .directive('confirm', function() {
+    .directive('todoList', function() {
         return {
-            templateUrl: 'templates/confirm.html',
+            templateUrl: 'templates/todoList.html',
             controller: 'todoController',
             replace: true
         };
