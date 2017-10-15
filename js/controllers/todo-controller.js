@@ -7,19 +7,9 @@ angular.module('toDoListApp')
         var index;
 
         $scope.toDelete = false;
-
-        $scope.addTodo = function() {
-            index = $scope.todos.length;
-            var todo = { key: index, name: "this is new todo." };
-            $scope.todos.push(todo);
-            index++;
-        };
-
-
-        // $scope.todos = dataService.getTodos(function(response) {
-        //     console.log(response.data);
-        //     $scope.todos = response.data;
-        // });
+        $scope.todos = dataService.getTodos(getTodoListIndex());
+        $scope.todoList = dataService.getTodoLists()[getTodoListIndex()];
+        $scope.todoLists = dataService.getTodoLists();
 
         function getTodoListIndex() {
             var UrlPathArr = $location.path().split('/');
@@ -28,27 +18,33 @@ angular.module('toDoListApp')
             return todoListIndex;
         }
 
+        if (typeof $scope.todoList !== 'undefined') {
+            $scope.todoListName = $scope.todoList.name;
+        }
 
-        $scope.todos = dataService.getTodos(getTodoListIndex());
-        console.log('$scope.todos:', $scope.todos);
+        $scope.addTodo = function() {
+            index = $scope.todos.length;
+            var todo = { key: index, name: "this is new todo." };
+            $scope.todoLists[getTodoListIndex()].todos.push(todo);
+            $scope.todos = $scope.todoLists[getTodoListIndex()].todos.slice();
+            index++;
+            dataService.saveTodoLists($scope.todoLists);
+        };
 
+        $scope.saveTodos = function() {
+            $scope.todoLists[getTodoListIndex()].todos = $scope.todos.slice();
+            dataService.saveTodoLists($scope.todoLists);
+        };
 
         $scope.deleteTodo = function(todo, index) {
             $scope.toDelete = true;
 
             $scope.deleteConfirmed = function() {
-                dataService.deleteTodo(todo);
-                $scope.todos.splice(index, 1);
+                $scope.todoLists[getTodoListIndex()].todos.splice(index, 1);
+                $scope.todos = $scope.todoLists[getTodoListIndex()].todos.slice();
+                dataService.saveTodoLists($scope.todoLists);
             };
         };
-
-        $scope.saveTodo = function(todo) {
-            dataService.saveTodo(todo);
-        };
-
-
-
-
 
         $scope.moveItem = function (origin, destination) {
             if (destination < 0) {

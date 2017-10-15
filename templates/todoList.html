@@ -5,13 +5,13 @@
     <div class="item" ng-class="{'completed': todoList.completed}" ng-repeat="todoList in todoLists">
             <input ng-model="todoList.completed" type="checkbox" />
             <span ng-click="todoList.completed = !todoList.completed; todoList.editedList = true"> </span>
-            <label ng-click="editingList = true; saveTodoLists(todoLists)" ng-hide="editingList">{{todoLists[$index].name}}</label>
-            <input id="input" ng-change="todoList.editedList = true;" ng-blur="editingList = false" ng-show="editingList" ng-model="todoList.name" type="text" />
+            <label ng-click="editingList = true" ng-hide="editingList">{{todoLists[$index].name}}</label>
+            <input id="input" ng-change="todoList.editedList = true;" ng-blur="editingList = false; saveTodoLists(todoLists)" ng-show="editingList" ng-model="todoList.name" type="text"/>
         <div class="actions">
-            <a href=#!todos-page/{{$index}}">Open</a>
-            <a href="" ng-click="deleteTodoList(todoList, $index)">Delete</a>
-            <a href="" ng-click="moveDownList($index); saveTodoLists(todoLists)">Up</a>
-            <a href="" ng-click="moveUpList($index); saveTodoLists(todoLists)">Down</a>
+            <a href=#!todos-page/{{$index}}">&curarr;</a>
+            <a href="" ng-click="deleteTodoList(todoList, $index)">&cross;</a>
+            <a href="" ng-click="moveDownList($index); saveTodoLists(todoLists)">&bigvee;</a>
+            <a href="" ng-click="moveUpList($index); saveTodoLists(todoLists)">&Wedge;</a>
         </div>
     </div>
 </div>

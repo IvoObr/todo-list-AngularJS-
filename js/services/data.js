@@ -9,8 +9,8 @@ angular.module('toDoListApp')
         // };
 
         this.getTodos = function(todoListIndex) {
-                if (typeof todoLists.length > 0) {
-                    return todoLists[todoListIndex].todos !== 'undefined';
+                if (typeof todoLists !== 'undefined' && todoLists.length > 0) {
+                    return todoLists[todoListIndex].todos;
                 } else {
                     return [];
                 }
@@ -31,11 +31,5 @@ angular.module('toDoListApp')
             var allTodoLists = JSON.stringify(todoLists);
             localStorage.setItem("allTodoLists", allTodoLists);
         };
-
-        // this.deleteTodoList = function(todoList) {
-        //     console.log(todoList);
-        //     console.log(todoList.key, todoList.name, todoList.todos);
-        //     localStorage.removeItem(todoList.name);
-        // };
 
     });

@@ -76,6 +76,25 @@ h3 {
     overflow: auto;
 }
 
-button {
-    border-radius: 5px;
+
+.button{
+    color: white;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: black;
+    border-radius: 11px;
+    cursor: pointer;
+    margin: 20px;
+    display: inline-block;
 }
+
+#home {
+    display: block;
+}
+
+/*.open {*/
+    /*background-image: url("../images/open.png");*/
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*background-size: cover;*/
+/*}*/

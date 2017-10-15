@@ -12,6 +12,7 @@ angular.module('toDoListApp')
             var todoList = { key: indexLists, name: "this is new todo list.", todos: [] };
             $scope.todoLists.push(todoList);
             indexLists++;
+            dataService.saveTodoLists($scope.todoLists);
         };
 
 
@@ -52,25 +53,5 @@ angular.module('toDoListApp')
         $scope.moveDownList = function (itemIndex) {
             $scope.moveListItem(itemIndex, itemIndex + 1);
         };
-
-        // $scope.goToTodoList = function (todoList) {
-        //     $scope.todoLists
-        //     //
-        //
-        //
-        //     // 2D array
-        //
-        //     //     response.data;
-        // }
-
-
-    //         <li ng-repeat="todo in todolist">
-    //         <a href="#/{{$index}}" class="item">
-    //
-    // .when('/:todoId', {
-    //         templateUrl: 'templates/views/categories-page.html',
-    //         controller: 'CategoriesController'
-
-
 
     });
